@@ -1,16 +1,25 @@
+#pragma once
+
 #include "svc.h"
 #include "types.h"
+#include "string.h"
 #include "agl/lyr/renderinfo.h"
+#include "agl/lyr/renderer.h"
 #include "agl/utl/devtools.h"
 #include "sead/textwriter.h"
 #include "sead/string.h"
 #include "sead/heap.h"
 #include "sead/matrix.h"
+#include "sead/arena.h"
 #include "Cmn/StaticMem.h"
+#include "Cmn/CameraUtl.h"
 #include "Cmn/PlayerInfoUtil.h"
 #include "Cmn/PlayerCtrl.h"
 #include "Cmn/Mush/MushDataHolder.h"
+#include "Cmn/GfxSetting.h"
+#include "Cmn/AppUBOMgr.h"
 #include "Cmn/Def/util.h"
+#include "Cmn/GfxUtl.h"
 #include "Lp/Utl.h"
 #include "Lp/Sys/ctrl.h"
 #include "Game/Utl.h"
@@ -19,10 +28,13 @@
 #include "Game/Player/Player.h"
 #include "Game/PlayerMgr.h"
 #include "Game/MainMgr.h"
+#include "Game/PaintUtl.h"
+#include "MiniGame/gfx.h"
+#include "aal/debugdrawer.h"
 #include "ModuleObject.hpp"
 
 enum Modes {
-    NONE, FLY, EVENT_VIEWER, INPUT_VIEWER,  PLAYER_SWITCHER, END
+    NONE, FLY, EVENT_VIEWER, INPUT_VIEWER,  PLAYER_SWITCHER, PAINT_ALL, END
 };
 
 void render(agl::DrawContext *drawContext, sead::TextWriter *textWriter);
@@ -34,12 +46,13 @@ void handlePlayerMgr(Game::PlayerMgr* playerMgr);
 void handlePlayerControl(Cmn::PlayerCtrl* playerCtrl);
 void handleMushDataHolder(Cmn::MushDataHolder* mushDataHolder);
 void handleMainMgr(Game::MainMgr* mainMgr);
+void handleGfxSetting(Cmn::GfxSetting*);
 
 char const* modeToText(Modes);
 
 enum Buttons {
-    B = 1 << 0,
-    A = 1 << 1,
+    A = 1 << 0,
+    B = 1 << 1,
     ZL = 1 << 2,
     Y = 1 << 3,
     X = 1 << 4,

@@ -2,38 +2,30 @@
 
 #include "types.h"
 
-#include "Player/Player.h"
+#include "Game/Player/Player.h"
+#include "PlayerModelResource.h"
 
 namespace Game {
-    class PlayerMgr {
+    class Player;
+
+    class PlayerMgr : public Cmn::Actor, public sead::IDisposer {
         public:
         
         static Game::PlayerMgr *sInstance;
-        void *actor;
-        char field_8[864];
-        __int64 *field_368;
-        char field_370[72];
-        __int32 field_3B8;
-        char field_3BC[4];
-        __int64 *field_3C0;
-        char field_3C8[64];
-        __int32 field_408;
-        char field_40C[4];
-        __int64 *field_410;
-        char field_418[224];
-        __int32 field_4F8;
-        char field_4FC[4];
-        __int64 *field_500;
-        char field_508[192];
-        signed int currentPlayerIndex;
-        _DWORD gap5CC[10];
-        __int32 field_5F4[2];
-        __int32 field_5FC[10];
-        _DWORD validInfoNum;
-        _BYTE gap628[8];
-        unsigned int validAmountOfPlayers;
-        _BYTE gap634[4];
-        Game::Player **someOtherPlayerArray;
+
+        Game::PlayerModelResource mModelResource; // Game::PlayerModelResource
+        unsigned int mCurrentPlayerIndex;
+        signed int mControlledArray[10];
+        int PlayerMgr_x5F4[2];
+        int mPlayerIndexes[10];
+        int mTotalPlayers;
+        u32 mValidInfo;
+        sead::PtrArrayImpl mAllKindPlayerArry;
+        sead::PtrArrayImpl mCustomMgrArry;
+        sead::PtrArrayImpl mPerformerArry;
+        sead::PtrArrayImpl mTotalPlayerArry;
+        
+        __int64 cmnCamera; // Game::PlayerCmnCamera *
 
         Game::Player* getControlledPerformer() const;
         Game::Player* getPerformerAt(unsigned int) const;
